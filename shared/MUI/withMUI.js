@@ -20,16 +20,16 @@ try {
 
 const withMaterialUI = ComposedComponent => {
     class HOC extends Component {
-        // static async getInitialProps(ctx) {
-        //     const {req} = ctx;
-        //     const userAgent = req ? req.header['user-agent'] : navigator.userAgent;
-        //     //const subProps = await ComposedComponent.getInitialProps(ctx);
+        static async getInitialProps(ctx) {
+            const {req} = ctx;
+            const userAgent = req ? req.headers['user-agent'] : navigator.userAgent;
+            const subProps = await ComposedComponent.getInitialProps(ctx);
 
-        //     return {
-        //         //...subProps,
-        //         userAgent
-        //     };
-        // }
+            return {
+                ...subProps,
+                userAgent
+            };
+        }
         render() {
             const {userAgent} = this.props;
             const Lato = 'lato, sans-serif';
@@ -47,9 +47,9 @@ const withMaterialUI = ComposedComponent => {
                     height: 50
                 }
             }, 
-            // {
-            //     userAgent
-            // }
+            {
+                userAgent
+            }
             )
             return (
                 <div>
